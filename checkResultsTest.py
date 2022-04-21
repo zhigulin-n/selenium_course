@@ -40,13 +40,17 @@ driver.implicitly_wait(5)
 # Объявляем переменные, result - для хранения результата сложения баллов
 result = 0
 # sum - для хранения значения, содержащегося в колонке Итоговый бал
-sum = int(driver.find_element_by_xpath(f"//*[@class='m-3 main']//tbody/tr[3]/td[18]").text)
+sum = int(driver.find_element_by_xpath("//tr[3]/td[18]").text)
+print(sum)
 
 # Считываем все баллы из 3 строки (т.е. 3 предмета в списке), парсим и складываем в result
 for i in range(7, 18):
-    value = intTryParse(driver.find_element_by_xpath(f"//*[@class='m-3 main']//tbody/tr[3]/td[{i}]").text)
+    value = intTryParse(driver.find_element_by_xpath(f"//tr[3]/td[{i}]").text)
+    print(value)
     if value[1]:
         result += int(value[0])
 
 # Проверяем, корректно ли отображается сумма баллов на сайте
 assert result == sum
+
+driver.quit()
